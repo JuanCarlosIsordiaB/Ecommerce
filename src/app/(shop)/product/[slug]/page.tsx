@@ -1,3 +1,5 @@
+import {QuantitySelector, SizeSelector } from "@/components";
+import { titleFont } from "@/config/fonts";
 import { initialData } from "@/seed/seed";
 import { notFound } from "next/navigation";
 
@@ -10,17 +12,30 @@ interface Props {
 export default function ProductPage({ params }: Props) {
   const { slug } = params;
   const product = initialData.products.find((product) => product.slug === slug);
-  if(!product) {
+  if (!product) {
     notFound();
   }
   return (
-    <div className="mt-5 mb-20 grid md:grid-col-3 gap-3">
-      {/* SlideShow */}
-      <div>
-        
+    <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div className="col-span-1 md:col-span-2 ">
+        <h1>Hola Primero</h1>
       </div>
-      {/* Details */}
-
+      <div className="col-span-1 md:col-span-1 ">
+        <h1 className={`${titleFont.className}`}>{product.title}</h1>
+        <p className="text-lg mb-5">${product.price}</p>
+        {/* Selector de Tallas */}
+        <SizeSelector
+          selectedSize={product.sizes[0]}
+          availableSizes={product.sizes}
+        />
+        {/* Selector de Cantidad */}
+        <QuantitySelector quantity={0} />
+        {/* Button*/}
+        <button className="btn-primary my-5">Add to Cart</button>
+        {/* Description*/}
+        <h3 className="font-bold text-sm">Description</h3>
+        <p className="font-light">{product.description}</p>
+      </div>
     </div>
   );
 }
