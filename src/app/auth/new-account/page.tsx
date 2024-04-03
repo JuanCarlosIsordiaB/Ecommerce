@@ -1,11 +1,51 @@
+import { titleFont } from "@/config/fonts";
+import Link from "next/link";
 
-
-
-
-export default function NewAccountPage() {
+export default function () {
   return (
-    <div>
-      <h1>Hello Page</h1>
+    <div className="flex flex-col min-h-screen pt-32 sm:pt-52">
+      <h1 className={`${titleFont.className} text-4xl mb-5`}>
+        Create a new account
+      </h1>
+
+      <div className="flex flex-col">
+        <label htmlFor="email">Full Name</label>
+        <input
+          className="px-5 py-2 border bg-gray-300 rounded mb-5"
+          type="email"
+        />
+        <label htmlFor="email">Email</label>
+        <input
+          className="px-5 py-2 border bg-gray-300 rounded mb-5"
+          type="email"
+        />
+
+        <label htmlFor="email">Password</label>
+        <input
+          className="px-5 py-2 border bg-gray-300 rounded mb-5"
+          type="email"
+          placeholder="Must include 6 characters with letters and numbers"
+        />
+        <label htmlFor="email">Repeat Password</label>
+        <input
+          className="px-5 py-2 border bg-gray-300 rounded mb-5"
+          type="email"
+          placeholder="Must include 6 characters with letters and numbers"
+        />
+
+        <button className="btn-primary">Create account</button>
+
+        {/* divisor l ine */}
+        <div className="flex items-center my-5">
+          <div className="flex-1 border-t border-gray-500"></div>
+          <div className="px-2 text-gray-800">O</div>
+          <div className="flex-1 border-t border-gray-500"></div>
+        </div>
+
+        <Link href="/auth/login" className="btn-secondary text-center">
+          Already have an account? Log in
+        </Link>
+      </div>
     </div>
   );
 }
