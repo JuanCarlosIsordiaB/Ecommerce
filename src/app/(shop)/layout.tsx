@@ -1,18 +1,15 @@
 import { Sidebar, TopMeu } from "@/components";
 
 export default function ShopLayout({
- children
+  children,
 }: {
- children: React.ReactNode;
+  children: React.ReactNode;
 }) {
   return (
-    <main className="min-h-screen px-5">
+    <main className="min-h-screen ">
       <TopMeu />
       <Sidebar />
-      <div className="px-9 sm:px-0">
-        {children}
-      </div>
-      
+      <div className="md:px-9 px-0">{children}</div>
     </main>
   );
 }

@@ -1,4 +1,9 @@
-import {QuantitySelector, SizeSelector } from "@/components";
+import {
+  ProductSlideShow,
+  QuantitySelector,
+  SizeSelector,
+  ProductMobileSlideShow,
+} from "@/components";
 import { titleFont } from "@/config/fonts";
 import { initialData } from "@/seed/seed";
 import { notFound } from "next/navigation";
@@ -18,9 +23,20 @@ export default function ProductPage({ params }: Props) {
   return (
     <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
       <div className="col-span-1 md:col-span-2 ">
-        <h1>Hola Primero</h1>
+        {/* Mobile SlideShow */}
+        <ProductMobileSlideShow
+          title={product.title}
+          images={product.images}
+          className="block md:hidden"
+        />
+        {/* Deshtop SlideShow*/}
+        <ProductSlideShow 
+          title={product.title} 
+          images={product.images} 
+          className="hidden md:block"
+        />
       </div>
-      <div className="col-span-1 md:col-span-1 ">
+      <div className="col-span-1 md:col-span-1 px-5 ">
         <h1 className={`${titleFont.className}`}>{product.title}</h1>
         <p className="text-lg mb-5">${product.price}</p>
         {/* Selector de Tallas */}
@@ -34,7 +50,7 @@ export default function ProductPage({ params }: Props) {
         <button className="btn-primary my-5">Add to Cart</button>
         {/* Description*/}
         <h3 className="font-bold text-sm">Description</h3>
-        <p className="font-light">{product.description}</p>
+        <p className="font-light mb-10">{product.description}</p>
       </div>
     </div>
   );
