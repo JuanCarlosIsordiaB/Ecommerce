@@ -1,4 +1,5 @@
-'use client'
+"use client";
+
 import { getStockBySlug } from "@/actions/products/get-stock-by-slug";
 import { titleFont } from "@/config/fonts";
 import { useEffect, useState } from "react";
@@ -7,23 +8,33 @@ interface Props {
   slug: string;
 }
 
-export const StockLabel = async ({ slug }: Props) => {
-    const [stock, setStock] = useState(0);
-    const [isLoading, setIsLoading] = useState(true);
-  
+export const StockLabel = ({ slug }: Props) => {
+  const [stock, setStock] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getStock();
+  }, []);
+
   const getStock = async () => {
     const productStock = await getStockBySlug(slug);
     setStock(productStock);
-    
-  }
-  useEffect(() => {
-    getStock();
-    
-  }, []);
+    setIsLoading(false);
+  };
 
   return (
-    <h1 className={`${titleFont.className} text-sm`}>
-      Products in Stock: {stock}
-    </h1>
+    <>
+      {isLoading ? (
+        <h1
+          className={` ${titleFont.className} antialiased font-bold text-lg bg-gray-400  animate-pulse`}
+        >
+          &nbsp;
+        </h1>
+      ) : (
+        <h1 className={`${titleFont.className} text-sm`}>
+          Products in Stock: {stock}
+        </h1>
+      )}
+    </>
   );
 };

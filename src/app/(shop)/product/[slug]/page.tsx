@@ -7,11 +7,38 @@ import {
   StockLabel,
 } from "@/components";
 import { titleFont } from "@/config/fonts";
+import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
+import AddToCart from "./ui/AddToCart";
 
 interface Props {
   params: {
     slug: string;
+  };
+}
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const slug = params.slug;
+
+  // fetch data
+  const product = await getProductBySlug(slug);
+
+  // optionally access and extend (rather than replace) parent metadata
+  // const previousImages = (await parent).openGraph?.images || []
+
+  return {
+    title: product?.title ?? "Producto no encontrado",
+    description: product?.description ?? "",
+    openGraph: {
+      title: product?.title ?? "Producto no encontrado",
+      description: product?.description ?? "",
+      // images: [], // https://misitioweb.com/products/image.png
+      images: [`/products/${product?.images[1]}`],
+    },
   };
 }
 
@@ -31,9 +58,9 @@ export default async function ProductPage({ params }: Props) {
           className="block md:hidden"
         />
         {/* Deshtop SlideShow*/}
-        <ProductSlideShow 
-          title={product.title} 
-          images={product.images} 
+        <ProductSlideShow
+          title={product.title}
+          images={product.images}
           className="hidden md:block"
         />
       </div>
@@ -42,14 +69,10 @@ export default async function ProductPage({ params }: Props) {
         <h1 className={`${titleFont.className}`}>{product.title}</h1>
         <p className="text-lg mb-5">${product.price}</p>
         {/* Selector de Tallas */}
-        <SizeSelector
-          selectedSize={product.sizes[0]}
-          availableSizes={product.sizes}
-        />
-        {/* Selector de Cantidad */}
-        <QuantitySelector quantity={0} />
-        {/* Button*/}
-        <button className="btn-primary my-5">Add to Cart</button>
+
+        {/* Client Component */}
+        <AddToCart product={product} />
+
         {/* Description*/}
         <h3 className="font-bold text-sm">Description</h3>
         <p className="font-light mb-10">{product.description}</p>
