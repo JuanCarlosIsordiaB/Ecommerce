@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 
 interface State {
+    getTotalItems: any;
     isSideMenuOpen: boolean;
     openSideMenu: () => void;
     closeSideMenu: () => void;
