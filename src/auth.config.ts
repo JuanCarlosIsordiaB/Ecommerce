@@ -1,3 +1,4 @@
+
 import NextAuth,  {type NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
@@ -5,7 +6,7 @@ import { z } from "zod";
 export const authConfig: NextAuthConfig = {
   pages: {
     signIn: "/auth/login",
-    newUser: "/auth/register",
+    newUser: "/auth/new-account",
   },
   providers: [
     Credentials({
@@ -13,6 +14,8 @@ export const authConfig: NextAuthConfig = {
         const parsedCredentials = z
           .object({ email: z.string().email(), password: z.string().min(6) })
           .safeParse(credentials);
+
+          console.log(parsedCredentials.success)
 
         if (!parsedCredentials.success) return null;
 
