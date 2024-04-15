@@ -4,10 +4,10 @@ import { inter } from "@/config/fonts";
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Ecommerce Shop',
+    template: '%s | Ecommerce Shop.',
     default: 'Home'
   },
-  description: "New ecommerce shop",
+  description: "New ecommerce shop.",
 };
 
 export default function RootLayout({
