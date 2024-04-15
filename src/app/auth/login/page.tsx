@@ -1,9 +1,8 @@
-'use server'
+'use server';
 import { titleFont } from '@/config/fonts';
-import Link from 'next/link';
 import LoginForm from './ui/LoginForm';
 
-export default function () {
+export default async function () {
   return (
     <div className="flex flex-col min-h-screen pt-32 sm:pt-52">
 
