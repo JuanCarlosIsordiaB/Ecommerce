@@ -4,7 +4,7 @@ import { inter } from "@/config/fonts";
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Ecommerce Shop.',
+    template: '%s | Ecommerce ShopP',
     default: 'Home'
   },
   description: "New ecommerce shop.",
